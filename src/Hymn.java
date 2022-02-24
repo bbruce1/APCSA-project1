@@ -1,6 +1,6 @@
 public class Hymn {
-    private static int range = (1100 - 10) + 1;
-    public int hymnNumber = 0;
+    private static final int range = (1100 - 10) + 1;
+    public int hymnNumber;
 
     public Hymn() {
         this.hymnNumber = (int) (Math.random() * range + 10);

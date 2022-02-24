@@ -9,50 +9,46 @@ public class Liturgy {
         this.hymn3 = new Hymn();
     }
 
-    public boolean hasNoRepeatingInts() {
-        boolean[] usedInts = new boolean[10];
-        int[] hymn1Array = convertHymnNumberToIntArray(hymn1);
-        int[] hymn2Array = convertHymnNumberToIntArray(hymn2);
-        int[] hymn3Array = convertHymnNumberToIntArray(hymn3);
+    public boolean hasString(String stringNeeded) {
+        int hymn1Number = this.hymn1.hymnNumber;
+        int hymn2Number = this.hymn2.hymnNumber;
+        int hymn3Number = this.hymn3.hymnNumber;
 
-        for (int currentInt : hymn1Array) {
-            if (!(usedInts[currentInt])) {
-                usedInts[currentInt] = true;
-            } else if (usedInts[currentInt]) {
-                return false;
-            }
-        }
+        String hymn1String = Integer.toString(hymn1Number);
+        String hymn2String = Integer.toString(hymn2Number);
+        String hymn3String = Integer.toString(hymn3Number);
 
-        for (int currentInt : hymn2Array) {
-            if (!(usedInts[currentInt])) {
-                usedInts[currentInt] = true;
-            } else if (usedInts[currentInt]) {
-                return false;
-            }
-        }
+        String totalString = "";
+        totalString += hymn1String;
+        totalString += hymn2String;
+        totalString += hymn3String;
 
-        for (int currentInt : hymn3Array) {
-            if (!(usedInts[currentInt])) {
-                usedInts[currentInt] = true;
-            } else if (usedInts[currentInt]) {
+        char currentChar;
+        String currentStringNumber;
+        for (int i = 0; i < stringNeeded.length(); i++) {
+            currentChar = stringNeeded.charAt(i);
+            currentStringNumber = Character.toString(currentChar);
+
+            if (totalString.contains(currentStringNumber)) {
+                totalString = totalString.replaceFirst(currentStringNumber, "");
+            } else if (!(totalString.contains(currentStringNumber))) {
                 return false;
             }
         }
         return true;
     }
 
-    private int[] convertHymnNumberToIntArray(Hymn hymn) {
-        Integer hymnNumber = hymn.hymnNumber;
-        String hymnString = hymnNumber.toString();
-        int[] hymnIntArray = new int[hymnString.length()];
-
-        int currentInt;
-        char dummyChar;
-        for (int i = 0; i < hymnString.length(); i++) {
-            dummyChar = hymnString.charAt(i);
-            currentInt = Character.getNumericValue(dummyChar);
-            hymnIntArray[i] = currentInt;
-        }
-        return hymnIntArray;
+    public String toString() {
+        String totalString = "";
+        int hymn1Number = this.hymn1.hymnNumber;
+        int hymn2Number = this.hymn2.hymnNumber;
+        int hymn3Number = this.hymn3.hymnNumber;
+        String hymn1String = Integer.toString(hymn1Number);
+        String hymn2String = Integer.toString(hymn2Number);
+        String hymn3String = Integer.toString(hymn3Number);
+        totalString += hymn1String;
+        totalString += hymn2String;
+        totalString += hymn3String;
+        return totalString;
     }
 }
